@@ -16,7 +16,7 @@ public class Dealer extends User {
     }
 
     public String startCardReport() {
-        return String.format("%s: %s", this.name, cardToString().substring(0, cardToString().indexOf(",")));
+        return String.format("%s: %s", this.name,cards.get(0));
     }
 
     @Override
