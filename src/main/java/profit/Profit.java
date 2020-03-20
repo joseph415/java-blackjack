@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 public enum Profit {
     BLACK_JACK_DRAW(
-            value -> (value * 0d),
+            value -> value * 0d,
             (dealer,user) -> (dealer.isBlackJack() && user.isBlackJack())
     ),
     BLACK_JACK(
@@ -27,11 +27,11 @@ public enum Profit {
             (dealer,user) -> (!DecisionWinner.compareWinner(user,dealer))
     );
 
-    private Function<Double,Double> porfit;
+    private Function<Double,Double> profit;
     private BiPredicate<User,User> predicate;
 
-    Profit(Function<Double, Double> porfit, BiPredicate<User,User> predicate) {
-        this.porfit = porfit;
+    Profit(Function<Double, Double> profit, BiPredicate<User,User> predicate) {
+        this.profit = profit;
         this.predicate = predicate;
     }
 
@@ -43,7 +43,7 @@ public enum Profit {
     }
 
     public double getProfit(Player player){
-        return this.porfit.apply(player.getMoney());
+        return this.profit.apply(player.getMoney());
     }
 
 }
