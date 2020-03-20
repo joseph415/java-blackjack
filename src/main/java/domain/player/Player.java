@@ -1,6 +1,7 @@
 package domain.player;
 
 import domain.card.Card;
+import domain.card.CardCalculator;
 import domain.money.BattingMoney;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class Player extends User {
         if (isBlackJack()) {
             return false;
         }
-        return isUnderWinningCount();
+        return CardCalculator.sumCardDeck(this.cards) < MAX_WINNING_COUNT;
     }
 
     public String getName() {

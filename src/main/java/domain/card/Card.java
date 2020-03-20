@@ -21,6 +21,7 @@ public class Card {
         return this.cardNumber.getCardNumber();
     }
 
+    //자동호출
     @Override
     public String toString() {
         return getCardNumber() + this.cardSuitSymbol.getSuitSymbol();

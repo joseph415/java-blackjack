@@ -3,6 +3,7 @@ package domain;
 import domain.player.Dealer;
 import domain.player.Player;
 import domain.player.Players;
+import profit.Profit;
 import profit.ProfitRule;
 import profit.ProfitStrategy;
 
@@ -16,11 +17,13 @@ public class ProfitResult {
 
     public ProfitResult(Players players, Dealer dealer) {
         Map<String, Double> winningPlayerResult = new LinkedHashMap<>();
-        ProfitStrategy profitStrategy;
+//        ProfitStrategy profitStrategy;
 
         for (Player player : players.getPlayers()) {
-            profitStrategy = ProfitRule.getProfitRule(player, dealer);
-            winningPlayerResult.put(player.getName(), profitStrategy.calculateProfitStrategy(player, dealer));
+//            profitStrategy = ProfitRule.getProfitRule(player, dealer);
+//            winningPlayerResult.put(player.getName(), profitStrategy.calculateProfitStrategy(player, dealer));
+            Profit profit = Profit.valueOf(dealer,player);
+            winningPlayerResult.put(player.getName(), profit.getProfit(player));
         }
         this.winningUserResult = generateWinningUserResult(winningPlayerResult);
     }

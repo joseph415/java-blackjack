@@ -11,10 +11,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public abstract class User {
-    private static final int MAX_WINNING_COUNT = 21;
-    private static final int BLACK_JACK = 21;
-    private static final int START_CARD_DECK_SIZE = 2;
-    public static final int BLACK_JACK_CARD_SIZE = 2;
+    protected static final int MAX_WINNING_COUNT = 21;
+    protected static final int BLACK_JACK = 21;
+    protected static final int START_CARD_DECK_SIZE = 2;
+    protected static final int BLACK_JACK_CARD_SIZE = 2;
 
     protected String name;
     protected final List<Card> cards;
@@ -28,18 +28,13 @@ public abstract class User {
         validateDuplicateCard();
     }
 
-    protected String cardToString() {
-        List<String> cardString = cards.stream().map(Card::toString).collect(Collectors.toList());
-
-        return String.join(",", cardString);
-    }
-
     public String userResult() {
         return String.format("%s - 결과: %s", cardReport(), CardCalculator.sumCardDeck(this.cards));
     }
 
     public String cardReport() {
-        return String.format("%s카드: %s", this.name, cardToString());
+        return String.format("%s카드: %s",
+                this.name, cards.stream().map(Card::toString).collect(Collectors.joining(",")));
     }
 
     public List<Card> getCard() {
@@ -54,15 +49,10 @@ public abstract class User {
         return money.getMoney();
     }
 
-
     public boolean isBlackJack() {
         return this.cards.stream().anyMatch(Card::isAce)
                 && this.cards.size() == BLACK_JACK_CARD_SIZE
                 && CardCalculator.sumCardDeck(this.cards) == BLACK_JACK;
-    }
-
-    public boolean isUnderWinningCount() {
-        return CardCalculator.sumCardDeck(this.cards) < MAX_WINNING_COUNT;
     }
 
     public void drawCard(Card card) {

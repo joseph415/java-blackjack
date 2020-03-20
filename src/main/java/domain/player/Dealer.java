@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Dealer extends User {
     private static final int ADDITIONAL_INSERT_CARD_STANDARD = 16;
+    public static final int OPEN_FIRST_CARD = 0;
 
     public Dealer(List<Card> userCardDeck) {
         super(userCardDeck);
@@ -16,7 +17,7 @@ public class Dealer extends User {
     }
 
     public String startCardReport() {
-        return String.format("%s: %s", this.name,cards.get(0));
+        return String.format("%s: %s", this.name,cards.get(OPEN_FIRST_CARD));
     }
 
     @Override
